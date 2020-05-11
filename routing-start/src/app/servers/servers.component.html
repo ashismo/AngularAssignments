@@ -4,7 +4,7 @@
       <!--ASHISH: Router query params and fragments. E.g. : http://localhost:4200/servers/5/edit?allowEdit=1#loading-->
       <a
         [routerLink]="['/servers', server.id]"
-        [queryParams]="{allowEdit: '1'}"
+        [queryParams]="{allowEdit: server.id === 3 ? '1': '0'}"
         fragment="loading"
         class="list-group-item"
         *ngFor="let server of servers">
@@ -13,9 +13,11 @@
     </div>
   </div>
   <div class="col-xs-12 col-sm-4">
-    <button class="btn btn-sm btn-primary" (click)="reloadServers()">Reload Servers</button>
+    <!--ASHISH: This is added fr the nested routing-->
+    <router-outlet></router-outlet>
+    <!-- <button class="btn btn-sm btn-primary" (click)="reloadServers()">Reload Servers</button>
     <app-edit-server></app-edit-server>
-    <hr>
+    <hr> -->
     <!-- <app-server></app-server> -->
   </div>
 </div>
