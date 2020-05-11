@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,11 @@ import { ServersService } from './servers/servers.service';
   imports: [
     BrowserModule,
     FormsModule,
+    RouterModule.forRoot([
+      {path: '', component: HomeComponent},
+      {path: 'users', component: UsersComponent},
+      {path: 'servers', component: ServersComponent}
+    ])
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
