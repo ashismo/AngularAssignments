@@ -31,7 +31,9 @@ import { ServersService } from './servers/servers.service';
       {path: 'users', component: UsersComponent},
       // ASHISH: Dynamic route
       {path: 'users/:id/:name', component: UserComponent},
-      {path: 'servers', component: ServersComponent}
+      {path: 'servers', component: ServersComponent},
+      {path: 'servers/:id', component: ServerComponent},
+      {path: 'servers/:id/edit', component: EditServerComponent}
     ])
   ],
   providers: [ServersService],
