@@ -29,6 +29,8 @@ import { ServersService } from './servers/servers.service';
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
       {path: 'users', component: UsersComponent},
+      // ASHISH: Dynamic route
+      {path: 'users/:id/:name', component: UserComponent},
       {path: 'servers', component: ServersComponent}
     ])
   ],
