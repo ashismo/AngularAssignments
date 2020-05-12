@@ -24,13 +24,26 @@ export class HomeComponent implements OnInit, OnDestroy {
       setInterval(
         () => {
           observer.next(count++);
+          if(count > 1002) {
+            // ASHISH : Observable completed
+            observer.complete();
+          }
+          if(count > 1003) {
+            observer.error(new Error("ERROR: Count has exceeded 1003"));
+          }
         }, 1000
       );
     });
 
     this.customSubscription = customInterval.subscribe(
       (data) => {
-        console.log(data);  // ASHISH: The custom observer emits the count 
+        console.log(data);  // ASHISH: The custom observable emits the count (L:26)
+      },
+      error => {
+        alert("An error has occured: " + error);
+      },
+      () => {
+        alert("Completed"); // ASHISH: As the observable completed so it will not execute this alert.
       }
     );
   }
