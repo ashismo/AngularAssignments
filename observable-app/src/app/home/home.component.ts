@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { interval, Subscription, Observable } from 'rxjs'; 
+import { map } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       setInterval(
         () => {
           observer.next(count++);
-          if(count > 1002) {
+          if(count > 1005) {
             // ASHISH : Observable completed
             observer.complete();
           }
@@ -35,7 +36,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       );
     });
 
-    this.customSubscription = customInterval.subscribe(
+    // ASHISH : Use operator to format data before subscription.
+    this.customSubscription = customInterval.pipe(
+      map(
+        (data:number) =>{
+          return "Round: " + (data % 500);
+        }
+      )
+    ).subscribe(
       (data) => {
         console.log(data);  // ASHISH: The custom observable emits the count (L:26)
       },
