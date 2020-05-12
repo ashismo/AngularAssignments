@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { interval, Subscription, Observable } from 'rxjs'; 
-import { map } from 'rxjs/operators'
+import { map, filter } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -38,6 +38,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     // ASHISH : Use operator to format data before subscription.
     this.customSubscription = customInterval.pipe(
+      filter(
+        (data: number) => {
+          return data > 1001;
+        }
+      ), // ASHISH: The map() and subscription() will be executed once the filter returns true.
       map(
         (data:number) =>{
           return "Round: " + (data % 500);
