@@ -23,6 +23,20 @@ export class AppComponent implements OnInit {
       'hobbies': new FormArray([])
     });
 
+    this.signupForm.setValue({
+      userData : {
+        username: 'ashish',
+        email: 'a@b.c'
+      },
+      gender: 'male',
+      hobbies: []
+    });
+
+    this.signupForm.patchValue({
+      userData : {
+        username: 'mondal',
+      }
+    });
     // ASHSIH: Status changes and value changes to monitor the fields closely
     this.signupForm.valueChanges.subscribe(
       (value) => console.log(value)
@@ -30,7 +44,7 @@ export class AppComponent implements OnInit {
 
     this.signupForm.statusChanges.subscribe(
       (status) => console.log(status)
-    )
+    );
   }
 
   onAddHobby() {
