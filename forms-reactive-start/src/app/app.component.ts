@@ -21,7 +21,16 @@ export class AppComponent implements OnInit {
       }),
       'gender': new FormControl('male'),
       'hobbies': new FormArray([])
-    })
+    });
+
+    // ASHSIH: Status changes and value changes to monitor the fields closely
+    this.signupForm.valueChanges.subscribe(
+      (value) => console.log(value)
+    );
+
+    this.signupForm.statusChanges.subscribe(
+      (status) => console.log(status)
+    )
   }
 
   onAddHobby() {
