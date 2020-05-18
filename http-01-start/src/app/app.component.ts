@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.errorSub.unsubscribe();
   }
-  
+
   onCreatePost(postData: Post) {
     // Send Http request
     this.postService.createAndStorePost(postData.title, postData.content);
@@ -67,5 +67,9 @@ export class AppComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     );
+  }
+
+  onHandleError() {
+    this.error = null;
   }
 }

@@ -63,6 +63,7 @@
   <div class="row">
     <div class="col-xs-12 alert alert-danger" *ngIf="error">
       {{ error }}
+      <div class="btn btn-sm btn-primary" (click)="onHandleError()">OK</div>
     </div>
   </div>
 </div>
