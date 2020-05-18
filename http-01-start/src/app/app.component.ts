@@ -13,6 +13,8 @@ import { PostsService } from './posts.service';
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
 
+  error: any = null;
+
   constructor(private http: HttpClient,
       private postService: PostsService) {}
 
@@ -43,6 +45,10 @@ export class AppComponent implements OnInit {
     this.postService.fetchPosts().subscribe(
       response => {
         this.loadedPosts = response;
+      }, 
+      error => {
+        this.error = error.message;
+        console.log(error);
       }
     );
   }
