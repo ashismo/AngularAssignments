@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {map} from 'rxjs/operators';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {map} from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
     this.onFetchPost();
   }
 
-  onCreatePost(postData: { title: string; content: string }) {
+  onCreatePost(postData: Post) {
     // Send Http request
     this.http
       .post(
@@ -39,11 +40,11 @@ export class AppComponent implements OnInit {
   }
 
   private onFetchPost() {
-    this.http.get('https://dummy-backed.firebaseio.com/posts.json')
+    this.http.get<{[key: string]: Post}>('https://dummy-backed.firebaseio.com/posts.json')
     // ASHISH: Transform data using pipe. Observers get data after the transformation of the data  
     .pipe(
       map(
-        response => {
+        (response: {[key: string]: Post}) => {
           const postsArray = [];
           for(const key in response) {
             if(response.hasOwnProperty(key)) {
@@ -56,6 +57,7 @@ export class AppComponent implements OnInit {
     )
     .subscribe(
       posts => {
+        this.loadedPosts = posts;
         console.log(posts);
       }
     );
