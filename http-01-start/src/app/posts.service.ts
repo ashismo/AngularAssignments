@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 import {Post} from './post.model';
-import {map, catchError} from 'rxjs/operators';
+import {map, catchError, tap} from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 
@@ -61,7 +61,22 @@ export class PostsService {
     }
 
     onDeletePosts() {
-        return this.http.delete('https://dummy-backed.firebaseio.com/posts.json');
+        //ASHISH: Added events type observe
+        return this.http.delete('https://dummy-backed.firebaseio.com/posts.json',
+        {
+            observe: 'events'
+        })
+        .pipe(
+            tap(event => {
+                console.log(event);
+                if(event.type === HttpEventType.Sent) {
+
+                }
+                if(event.type === HttpEventType.Response) {
+                    console.log(event.body);
+                }
+            })
+        )
     }
 
 }
