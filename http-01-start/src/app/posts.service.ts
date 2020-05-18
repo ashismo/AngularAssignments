@@ -20,8 +20,12 @@ export class PostsService {
 
         this.http
             .post(
-                'https://dummy-backed1.firebaseio.com/posts.json',
-                postData
+                'https://dummy-backed.firebaseio.com/posts.json',
+                // ASHISH: Get the entire response rather than the data only. It will include response body, header etc
+                postData,
+                {
+                    observe: 'response'
+                }
             )
             .subscribe(
                 responseData => {
