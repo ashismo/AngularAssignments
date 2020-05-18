@@ -42,4 +42,8 @@ export class PostsService {
         );
     }
 
+    onDeletePosts() {
+        return this.http.delete('https://dummy-backed.firebaseio.com/posts.json');
+    }
+
 }
