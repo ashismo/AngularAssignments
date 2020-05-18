@@ -1,4 +1,5 @@
-import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler } from '@angular/common/http';
+import { HttpInterceptor, HttpRequest, HttpResponse, HttpHandler, HttpEventType } from '@angular/common/http';
+import { tap } from 'rxjs/operators'
 
 // ASHISH: Interceptor to intercept all requests in a common place
 export class AuthInterceptorService implements HttpInterceptor {
@@ -9,6 +10,14 @@ export class AuthInterceptorService implements HttpInterceptor {
         const modifiedRequest = req.clone({
             headers: req.headers.append('Auth', 'xyz')
         })
-        return next.handle(modifiedRequest);
+
+        // ASHISH: Intercept the response
+        return next.handle(modifiedRequest).pipe(tap(event => {
+            console.log(event);
+            if(event.type === HttpEventType.Response) {
+                console.log("Response has arrived");
+                console.log(event.body);
+            }
+        }));
     }
 }
