@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'filter'
+  name: 'filter',
+  pure: false // ASHISH: default value is true. The pipe get recalculated when the value is false
 })
 export class FilterPipe implements PipeTransform {
 
@@ -11,7 +12,7 @@ export class FilterPipe implements PipeTransform {
     }
 
 
-      const resultArray = [];
+    const resultArray = [];
     for(const item of value) {
       if(item[propName] == filterString) {
         resultArray.push(item);

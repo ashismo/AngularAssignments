@@ -2,6 +2,8 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       <input type="text" [(ngModel)] = "filteredStatus">
+      <br>
+      <div class="btn btn-sm btn-primary" (click)="onAddServer()">Add Server</div>
       <ul class="list-group">
         <!--Filter added on the for loop-->
         <li
@@ -12,7 +14,7 @@
             class="badge">
             {{ server.status }}
           </span>
-          <strong>{{ server.name | shorten: 5}}</strong> | 
+          <strong>{{ server.name | shorten: 10}}</strong> | 
           {{ server.instanceType | uppercase}} | 
           {{ server.started | date: 'fullDate'}}
         </li>
