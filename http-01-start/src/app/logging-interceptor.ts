@@ -6,6 +6,7 @@ export class LoggingInterceptorService implements HttpInterceptor {
         // ASHISH: This mthod will be called just before the request is sent from an angular application
         console.log("Requesy is on its way");
         console.log(req.url);
+        console.log(req.headers);
          // ASHISH: Intercept the response
          return next.handle(req).pipe(tap(event => {
             console.log("Event: ", event);
